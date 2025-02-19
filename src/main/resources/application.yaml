@@ -1,4 +1,7 @@
 constants:
+  jackson:
+    date-format: yyyy-MM-dd
+    date-time-format: yyyy-MM-dd HH:mm:ss
   swagger:
     info:
       title: SpringJPA
@@ -13,6 +16,18 @@ spring:
     url: jdbc:log4jdbc:mariadb://localhost/spring_jpa
     username: root
     password: green502
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 5
+        format_sql: true
+        order_updates: true
+    show-sql: true
+
 
 springdoc:
   swagger-ui:
