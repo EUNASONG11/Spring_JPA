@@ -20,7 +20,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
-    List<StudentRes> getList(@RequestParam int page, @RequestParam int size) {
+    List<StudentRes> getList(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         return studentService.getStudentList(PageRequest.of(page, size));
     }
 

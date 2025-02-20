@@ -1,5 +1,6 @@
 package com.green.springjpa.config;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +17,8 @@ public class JacksonFormatConfiguration {
                                                            , @Value("${constants.jackson.date-time-format}") final String dateTimeFormat) {
         return builder -> {
             builder.simpleDateFormat(dateFormat)
-                   .serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(dateFormat)))
-                   .serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateTimeFormat)));
+                   .serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(dateFormat)), new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateTimeFormat)))
+                   .serializerByType(Long.class, ToStringSerializer.instance); //Long to String
         };
     }
 }
