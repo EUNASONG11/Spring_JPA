@@ -15,6 +15,9 @@ public class School extends CreatedAt {
     @Id @Tsid
     private Long schoolId;
 
+    @Column(nullable = false)
+    private SchoolTypeCode schoolTypeCode;
+
     @Column(nullable = false, length = 100)
     private String name;
 }
