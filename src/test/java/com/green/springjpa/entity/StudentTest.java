@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,6 +16,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
     @Autowired //TDD 에서 DI 받을 때는 @Autowired 애노테이션으로 해야 한다.
     private StudentRepository studentRepository;
+
+    @Test
+    @Rollback(false)
+    public void insertStudent() {
+        School school = School.builder()
+                .schoolId(680591760229098209L)
+                .build();
+
+        Student student = Student.builder()
+                .gradeTypeCode(StudentGradeTypeCode.GRADE_2)
+                .name("테스트")
+                .school(school)
+                .build();
+        studentRepository.save(student);
+    }
 
     @Test
     @Transactional
